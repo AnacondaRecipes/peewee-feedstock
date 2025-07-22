@@ -42,9 +42,11 @@ test:
   commands:
     - pip check
     - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
-    # Remove tests/sqlite.py to fix test scope -> peewee.OperationalError: no such module: FTS4
-    - python -c "import os; p='gh/tests/sqlite.py'; os.remove(p) if os.path.exists(p) else None"
-    - python gh/runtests.py
+    # peewee.OperationalError: no such module: FTS4
+    - rm -f gh/tests/sqlite.py  # [unix]
+    # Drop upstream tests on Windows:
+    # PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'peewee_test.db'
+    - python gh/runtests.py  # [unix]
 
 about:
   home: https://github.com/coleifer/peewee
