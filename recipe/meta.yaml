@@ -7,7 +7,7 @@ package:
 
 source:
   - url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  - sha256: 77a54263eb61aff2ea72f63d2eeb91b140c25c1884148e28e4c0f7c4f64996a0
+    sha256: 77a54263eb61aff2ea72f63d2eeb91b140c25c1884148e28e4c0f7c4f64996a0
   - url: https://github.com/coleifer/{{ name }}/archive/refs/tags/{{ version }}.tar.gz
     sha256: 20f5ca85d46f0c251cba5ab6f734b09e89ea77af56ad66708225bc7d4331f4c7
     folder: gh
@@ -23,11 +23,10 @@ requirements:
   host:
     - python
     - pip
-    - cython
-    - msinttypes  # [win]
-    - sqlite
     - setuptools
     - wheel
+    - cython
+    - sqlite
   run:
     - python
 
@@ -44,8 +43,7 @@ test:
     - pip check
     - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
     # Remove tests/sqlite.py to fix test scope -> peewee.OperationalError: no such module: FTS4
-    - rm -f gh/tests/sqlite.py  # [unix]
-    - del /q gh/tests/sqlite.py  # [win]
+    - python -c "import os; p='gh/tests/sqlite.py'; os.remove(p) if os.path.exists(p) else None"
     - python gh/runtests.py
 
 about:
