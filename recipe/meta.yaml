@@ -20,12 +20,11 @@ requirements:
   build:
     - python
     - {{ compiler('c') }}
-    # - {{ stdlib('c') }}
   host:
     - python
     - pip
     - cython
-    # - msinttypes  # [win]
+    - msinttypes  # [win]
     - sqlite
     - setuptools
     - wheel
@@ -45,8 +44,8 @@ test:
     - pip check
     - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
     # Remove tests/sqlite.py to fix test scope -> peewee.OperationalError: no such module: FTS4
-    - rm gh/tests/sqlite.py  # [unix]
-    - del gh/tests/sqlite.py  # [win]
+    - rm -f gh/tests/sqlite.py  # [unix]
+    - del /q gh/tests/sqlite.py  # [win]
     - python gh/runtests.py
 
 about:
@@ -57,7 +56,7 @@ about:
   summary: Peewee is a simple and small ORM.
   description: Peewee is a simple and small ORM. It has few (but expressive) concepts, making it easy to learn and intuitive to use.
   dev_url: https://github.com/coleifer/peewee
-  doc_url: http://docs.peewee-orm.com/en/latest
+  doc_url: https://docs.peewee-orm.com/en/latest
 
 extra:
   recipe-maintainers:
