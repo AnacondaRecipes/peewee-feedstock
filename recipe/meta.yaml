@@ -26,7 +26,7 @@ requirements:
     - setuptools
     - wheel
     - cython
-    - sqlite
+    - sqlite {{ sqlite }}
   run:
     - python
 
@@ -56,7 +56,7 @@ about:
   summary: Peewee is a simple and small ORM.
   description: Peewee is a simple and small ORM. It has few (but expressive) concepts, making it easy to learn and intuitive to use.
   dev_url: https://github.com/coleifer/peewee
-  doc_url: https://docs.peewee-orm.com/en/latest
+  doc_url: https://docs.peewee-orm.com
 
 extra:
   recipe-maintainers:
